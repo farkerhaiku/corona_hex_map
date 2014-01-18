@@ -3,6 +3,28 @@ Hexagon.__index = Hexagon -- failed table lookups on the instances should fallba
 
 local generate_points = function(self)
     local h = {}
+    local center_x , center_y = 50, 50
+    local x_i, y_i, i
+    for i=1, 6 do
+        local angle = 2 * math.pi / 6 * (i + 0.5)
+        x_i = center_x + self.height * math.cos(angle)
+        y_i = center_y + self.height * math.sin(angle)
+        h[#h + 1] = x_i
+        h[#h + 1] = y_i
+    end
+    
+    self.vertices = {
+        h[1],                 h[2],
+        h[3],                 h[4],
+        h[5],                 h[6],
+        h[7],                 h[8],
+        h[9],                 h[10],
+        h[11],                h[12]
+    }
+end
+-- pointy top hexagons
+local generate_points_vertical = function(self)
+    local h = {}
     h.l  = (self.height / 2) / math.sin(45)
     h.dX = math.cos(45) * h.l
     h.dY = math.sin(45) * h.l
