@@ -14,10 +14,7 @@ physics.start(); physics.pause()
 
 --------------------------------------------
 
--- forward declarations and other locals
 local screenW, screenH, halfW = display.contentWidth, display.contentHeight, display.contentWidth*0.5
-
--- Called when the scene's view does not exist:
 
 function scene:createScene( event )
 	local group = self.view
@@ -30,11 +27,20 @@ function scene:createScene( event )
 	
 	
 	group:insert( background )
-    local hex = Hexagon.new(1, 1, 50)
+	local hexes = {}
+	local width = math.sqrt(3)/2 * 60
+	local hex 
+    hex = Hexagon.new(1, 1, 60)
     hex:draw()
-    local hex2 = Hexagon.new(2, 2, 50)
-    hex2:draw()
+	display.newLine( 120, 30, 120, 60 )
+	display.newLine( 30, 120, 60, 120 )
+	
+	local line = display.newLine( 60, 60, 60 + width, 60 )
+	line:setStrokeColor(0)
     
+--    local hex2 = Hexagon.new(2, 3, 30)
+--    hex2:draw()
+--    
 end
 
 -- Called immediately after scene has moved onscreen:

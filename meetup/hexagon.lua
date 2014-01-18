@@ -22,10 +22,9 @@ Hexagon.generate_points = generate_points
 local touch = function(self, event)
     if event.phase == "began" then
         print("huh?", self.x)
-        self.displayObject.strokeWidth = 10
-        self.displayObject:setStrokeColor( 0, 1, 1 )
+        self.displayObject:setFillColor(0, 1, 1)
     elseif event.phase == "ended" then
-        self.displayObject.strokeWidth = 0
+        self.displayObject:setFillColor(1, 1, 1)
     end
 end
 
@@ -44,6 +43,9 @@ Hexagon.new = new
 
 local draw = function(self)
     self.displayObject = display.newPolygon( self.height * self.x, self.height * self.y, self.vertices )
+    self.displayObject.strokeWidth = 1
+    self.displayObject:setStrokeColor( 0 )
+    
     self.displayObject:addEventListener( "touch", self)
 end
 Hexagon.draw = draw
