@@ -48,6 +48,13 @@ local touch = function(self, event)
     end
 end
 
+local generateCoordinates = function(self, x,y)
+    self.cubeCoords = {}
+    self.cubeCoords.x = x - 1
+    self.cubeCoords.y = y - 1
+end
+Hexagon.generateCoordinates = generateCoordinates
+
 local new = function(x, y, size)
     local self = setmetatable({}, Hexagon)
     self.x = x
@@ -57,6 +64,7 @@ local new = function(x, y, size)
     self.height = size * 2
     self.width = math.sqrt(3)/2*self.height
     self:generate_points()
+    self:generateCoordinates(x, y)
     self.touch = touch
     
     return self
