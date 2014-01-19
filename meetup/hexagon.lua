@@ -47,11 +47,26 @@ local touch = function(self, event)
         self.displayObject:setFillColor(1, 1, 1)
     end
 end
+local generateCubeCoords = function(self, x, y)
+    local cubeCoords = {}
+    cubeCoords.x = x - 1
+    cubeCoords.y = y - 1
+    return cubeCoords
+end
+Hexagon.generateCubeCoords = generateCubeCoords
+
+local generateAxialCoords = function(self, coords)
+    local axialCoords = {}
+    axialCoords.x = coords.x
+    axialCoords.y = coords.y
+    axialCoords.z = 0 - coords.x - coords.y
+    return axialCoords
+end
+Hexagon.generateAxialCoords = generateAxialCoords
 
 local generateCoordinates = function(self, x,y)
-    self.cubeCoords = {}
-    self.cubeCoords.x = x - 1
-    self.cubeCoords.y = y - 1
+    self.cubeCoords = self:generateCubeCoords(x, y)
+    self.axialCoords = self:generateAxialCoords(self.cubeCoords)
 end
 Hexagon.generateCoordinates = generateCoordinates
 
