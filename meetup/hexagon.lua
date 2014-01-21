@@ -87,13 +87,13 @@ local new = function(x, y, size)
     local self = setmetatable({}, Hexagon)
     self.x = x
     self.y = y
+    self.someName = "Hex[".. x .. "][" .. y .. "]"
     
     self.size = size
     self.height = size * 2
     self.width = math.sqrt(3)/2*self.height
     self:generate_points()
     self:generateCoordinates(x, y)
-    self.touch = touch
     
     return self
 end
@@ -109,10 +109,20 @@ local draw = function(self)
     end
     self.displayObject = display.newPolygon( xCoord, yCoord, self.vertices )
     self.displayObject.strokeWidth = 1
+    self.displayObject.reverseHexReference = self
     self.displayObject:setStrokeColor( 0 )
-    
-    self.displayObject:addEventListener( "touch", self)
 end
 Hexagon.draw = draw
+
+local resetColors = function(self)
+    self.displayObject:setFillColor(1, 1, 1)
+end
+Hexagon.resetColors = resetColors
+
+local highlightColors = function(self)
+    self.displayObject:setFillColor(0, 1, 1)
+end
+Hexagon.highlightColors = highlightColors
+
 
 return Hexagon

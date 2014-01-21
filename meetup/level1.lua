@@ -4,17 +4,20 @@ local Hexagon = require("hexagon")
 
 local screenW, screenH, halfW = display.contentWidth, display.contentHeight, display.contentWidth*0.5
 
+local hexes = {}
+local highlight = function(event)
+    print("event target", event.target.name)
+end
+
 function scene:createScene( event )
 	local group = self.view
 
-	-- create a grey rectangle as the backdrop
 	local background = display.newRect( 0, 0, screenW, screenH )
 	background.anchorX = 0
 	background.anchorY = 0
 	background:setFillColor( .5 )
 	
 	group:insert( background )
-	local hexes = {}
 	local hexHeight = 20
 	
 	local hex = Hexagon.new(1, 1, hexHeight)
@@ -25,6 +28,20 @@ function scene:createScene( event )
     	for i=1, maxHexesWidth do
     	   hex = Hexagon.new(i, j, hexHeight)
     	   hex:draw()
+    	   function hex:touch(event)
+    	       if event.phase == "began" then
+    	           local targetHex = event.target.reverseHexReference
+    	           for k=1, #hexes do
+    	               local distance = targetHex:distanceBetween(hexes[k])
+    	               if(distance < 4) then
+    	                   print("distance:", distance)
+    	                   hexes[k]:highlightColors()
+    	               end
+    	           end
+    	       end
+    	   end
+           hex.displayObject:addEventListener( "touch", hex)
+           
     	   hexes[#hexes + 1] = hex
     	end
 	end
