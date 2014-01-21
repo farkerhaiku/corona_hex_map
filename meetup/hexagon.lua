@@ -1,5 +1,6 @@
 local Hexagon = {}
 Hexagon.__index = Hexagon -- failed table lookups on the instances should fallback to the class table, to get methods
+local abs = math.abs
 
 local generate_points = function(self)
     local h = {}
@@ -63,6 +64,18 @@ local generateAxialCoords = function(self, coords)
     return axialCoords
 end
 Hexagon.generateAxialCoords = generateAxialCoords
+
+local distanceBetween = function(self, other)
+    local foo = self.axialCoords
+    local bar = other.axialCoords
+    local xDiff = abs(bar.x - foo.x) 
+    local yDiff = abs(bar.y - foo.y) 
+    local zDiff = abs(bar.z - foo.z)
+    local maxXY = (xDiff > yDiff) and xDiff or yDiff
+    local maxYZ = (yDiff > zDiff) and yDiff or zDiff 
+    return (maxXY > maxYZ) and maxXY or maxYZ
+end
+Hexagon.distanceBetween = distanceBetween
 
 local generateCoordinates = function(self, x,y)
     self.cubeCoords = self:generateCubeCoords(x, y)

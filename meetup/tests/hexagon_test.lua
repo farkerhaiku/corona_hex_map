@@ -27,3 +27,16 @@ function test_axial_coordinates_generated()
     assert_true(second.axialCoords.y == 1)
     assert_true(second.axialCoords.z == -1)
 end
+
+function test_axial_coordinates_distance_calculation()
+    local first = Hexagon.new(1, 1, 30)
+    local second = Hexagon.new(1, 2, 30)
+    local third = Hexagon.new(1, 3, 30)
+    local fourth = Hexagon.new(2, 3, 30)
+    assert_equal(1, fourth.axialCoords.x)
+    assert_equal(2, fourth.axialCoords.y)
+    assert_equal(-3, fourth.axialCoords.z)
+    assert_equal(1, first:distanceBetween(second), "distance between 0,0 and 0,1 should be 1")
+    assert_equal(2, first:distanceBetween(third), "distance between 0,0 and 0,2 should be 2")
+    assert_equal(3, first:distanceBetween(fourth), "distance between 0,0 and 1,2 should be 3")
+end
