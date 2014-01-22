@@ -38,6 +38,10 @@ function scene:createScene( event )
     	                   hexes[k]:highlightColors()
     	               end
     	           end
+    	       elseif event.phase == "ended" then
+    	           for k=1, #hexes do
+    	               hexes[k]:resetColors()
+    	           end
     	       end
     	   end
            hex.displayObject:addEventListener( "touch", hex)

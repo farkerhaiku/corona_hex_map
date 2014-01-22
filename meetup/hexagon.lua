@@ -103,7 +103,6 @@ local draw = function(self)
     local xCoord = self.width * self.x
     local vertOffset = self.size * 1/2 * (self.y-1)
     local yCoord = self.size * self.y + vertOffset
-    local text = "" .. self.axialCoords.x .. "," .. self.axialCoords.y
     
     if (self.y % 2 == 0) then
         xCoord = xCoord - self.width / 2
@@ -112,7 +111,6 @@ local draw = function(self)
     self.displayObject.strokeWidth = 1
     self.displayObject.reverseHexReference = self
     self.displayObject:setStrokeColor( 0 )
-    display.newText(text, xCoord, yCoord)
 end
 Hexagon.draw = draw
 
