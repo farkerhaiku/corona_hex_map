@@ -58,7 +58,6 @@ end
 function test_axial_coordinates_distance_calculation_between_first_and_fifth()
     local first = Hexagon.new(1, 1, 30) -- 0,0
     local fifth = Hexagon.new(4, 5, 30) -- 
-    print("######*****####", fifth.someName)
     assert_equal(1, fifth.axialCoords.x, "fourth x should be 2")
     assert_equal(4, fifth.axialCoords.y, "fourth y should be 2")
     assert_equal(-5, fifth.axialCoords.z, "fourth z should be -5")
