@@ -22,8 +22,8 @@ local generate_points = function(self)
         h[11],                h[12]
     }
 end
--- pointy top hexagons
-local generate_points_vertical = function(self)
+-- flat top hexagons algorithm blatantly stolen from the web somewhere
+local generate_points_flat_top = function(self)
     local h = {}
     h.l  = (self.size / 2) / math.sin(45)
     h.dX = math.cos(45) * h.l

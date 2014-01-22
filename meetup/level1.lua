@@ -5,9 +5,6 @@ local Hexagon = require("hexagon")
 local screenW, screenH, halfW = display.contentWidth, display.contentHeight, display.contentWidth*0.5
 
 local hexes = {}
-local highlight = function(event)
-    print("event target", event.target.name)
-end
 
 function scene:createScene( event )
 	local group = self.view
@@ -34,7 +31,6 @@ function scene:createScene( event )
     	           for k=1, #hexes do
     	               local distance = targetHex:distanceBetween(hexes[k])
     	               if(distance < 4) then
-    	                   print("distance:", distance)
     	                   hexes[k]:highlightColors()
     	               end
     	           end
